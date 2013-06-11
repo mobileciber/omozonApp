@@ -1,0 +1,1 @@
+POC for elaborating phonegap, jQuery, AngularJS
