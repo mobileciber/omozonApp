@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="login-app">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+<script src="js/authentication.js"></script>
+
+<meta charset="UTF-8">
+<title>Login-Test</title>
+</head>
+<body>
+	<h2>Todo</h2>
+	<div ng-controller="TodoCtrl">
+		<form ng-submit="login()">
+        <input type="text" ng-model="username"  size="30" placeholder="Benutzer">
+        <input type="password" ng-model="passwd"  size="30" placeholder="Passwort">
+        <input class="btn-primary" type="submit" value="add">
+    	</form>
+    	<div ng-model="userdata">
+    	{{userdata}}
+    	</div>
+    	
+	</div>
+	
+</body>
+</html>
