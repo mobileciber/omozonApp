@@ -1,5 +1,7 @@
 Debugging
 https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk?utm_source=chrome-ntp-icon
+http://developer.android.com/guide/webapps/debugging.html
+https://github.com/apache/cordova-weinre
 
 Testing from Browser:
 open /Applications/Google\ Chrome.app --args --allow-file-access-from-files
