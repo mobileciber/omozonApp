@@ -7,7 +7,7 @@ Testing from Browser:
 open /Applications/Google\ Chrome.app --args --allow-file-access-from-files
 is to avoid CORS problems
 
-Authentication
+Authentication (Basic and Digest Authentication, API Key, OAuth, OAuth2)
 The backend only delivers data and requires Basic Auth for every data-request.
 Hence when a HTTP 401 error-response comes, the initial request must be persisted, a loginform has to be shown and after invoking login button the initial request must be reissued with the new credentials. 
 In case of a HTTP 200 response, this credentials have to be cached in the application.

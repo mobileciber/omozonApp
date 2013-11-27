@@ -99,7 +99,7 @@ function TodoCtrl($scope, $http, Base64) {
 //		$http.defaults.headers.common = {'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'};
 		$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.username + ':' + $scope.passwd);
         $http.defaults.headers.post = {'Content-Type': 'application/json'};
-        $http({method: 'GET', url: 'http://localhost:8484/hybridmobile-backend/api/customers?username=' + $scope.username}).
+        $http({method: 'GET', url: 'http://192.168.0.101:8484/hybridmobile-backend/api/customers?username=' + $scope.username}).
 	            success(function(data, status, headers, config) {
 	                $scope.userdata = data;
 	                // this callback will be called asynchronously
