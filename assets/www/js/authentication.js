@@ -90,7 +90,7 @@ app.factory('Base64', function() {
 });
 
 //here's where YOUR code is finally accessed
-function TodoCtrl($scope, $http, Base64) {
+function TodoCtrl($scope, $http, Base64, $q) {
 	$scope.login = function(){	
 //		$http.defaults.headers.common = {'Access-Control-Allow-Origin': '*'};
 //		$http.defaults.headers.common = {'Access-Control-Allow-Credentials': true};
@@ -106,10 +106,28 @@ function TodoCtrl($scope, $http, Base64) {
 	                // when the response is available
 	            }).
 	            error(function(data, status, headers, config) {
-//	                alert(data);
-	                $scope.userdata = data;
 	                // called asynchronously if an error occurs
 	                // or server returns response with an error status.
+	                $scope.userdata = data;
+	                // Handling:
+	                // 1) capture 401 response,
+	                if (status == 401) {
+						var deferred = $q.defer();
+						// 2) save the request parameters, so in the future we can reconstruct original request,
+						var req = {
+							config : config,
+							deferred : deferred
+						}
+						// 3) create and return new object representing server’s future answer (instead of returning the original failed response),
+						$scope.requests401 = [];
+						$scope.requests401.push(req);
+						// 4) broadcast that login is required, so application can react, in particular login form can appear,
+						$scope.$broadcast('event:loginRequired');
+						// 5) listen to login successful events, so we can gather all the saved request parameters, resend them again and trigger all the ‚future’ objects (returned previously).
+						return deferred.promise;
+					}
+					// otherwise
+					return $q.reject(response);
 	            });
 		
 		//alert($scope.username + " : " + $scope.passwd);

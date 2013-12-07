@@ -1,8 +1,15 @@
-app.controller('HomeController', function ($scope, homeService) {
+var controllers = angular.module('omozonControllers', ['homeService',
+                                                       'userService',
+                                                       'storeService',
+                                                       'storeOffersService',
+                                                       'productService',
+                                                       'myOmozonService']);
+
+controllers.controller('HomeController', function ($scope, homeService) {
 	
 }
 
-app.controller('UserController', function ($scope, userService) { // angular performs DI: denominator usersService equals denominator registered in userService.js
+controllers.controller('UserController', function ($scope, userService) { // angular performs DI: denominator usersService equals denominator registered in userService.js
 
     //I like to have an init() for controllers that need to perform some initialization. Keeps things in
     //one place...not required though especially in the simple example below
@@ -27,18 +34,18 @@ app.controller('UserController', function ($scope, userService) { // angular per
     };
 });
 
-app.controller('StoreController', function ($scope, storeService) {
+controllers.controller('StoreController', function ($scope, storeService) {
 	
 }
 
-app.controller('StoreOffersController', function ($scope, storeOffersService) {
+controllers.controller('StoreOffersController', function ($scope, storeOffersService) {
 	
 }
 
-app.controller('ProductsController', function ($scope, productService) {
+controllers.controller('ProductsController', function ($scope, productService) {
 	
 }
 
-app.controller('MyOmozonController', function ($scope, myOmozonService) {
+controllers.controller('MyOmozonController', function ($scope, myOmozonService) {
 	
 }
