@@ -22,6 +22,7 @@ http://www.espeo.pl/2012/02/26/authentication-in-angularjs-application
 https://github.com/witoldsz/angular-http-auth
 http://frederiknakstad.com/authentication-in-single-page-applications-with-angular-js/
 http://nils-blum-oeste.net/angularjs-send-auth-token-with-every--request/
+http://angularjs.de/artikel/angularjs-login-sicherheit
 
 CORS
 http://www.html5rocks.com/en/tutorials/cors/

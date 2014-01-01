@@ -1,7 +1,19 @@
 <div class="home view">
     <div class="container">
+    <a href="#/">home</a>
         <header>
             <h3>Login</h3>
         </header>
+        <div ng-controller="UserController">
+		<form ng-submit="login()">
+        <input type="text" ng-model="username"  size="30" placeholder="Benutzer">
+        <input type="password" ng-model="passwd"  size="30" placeholder="Passwort">
+        <input class="btn-primary" type="submit" value="login">
+    	</form>
+    	<div ng-model="userdata">
+    	{{userdata}}
+    	</div>
+    	
+	</div>
 	</div>
 </div>
