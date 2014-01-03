@@ -20,19 +20,25 @@ var omozonControllers = angular.module('omozonControllers', ['homeService',
 
 omozonControllers.controller('HomeController', ['$rootScope', '$scope', '$q', '$http', '$location', 'homeService',
     function ($rootScope, $scope, $q, $http, $location, homeService) {
-	var name = "Anonymous";
-	if($rootScope.userdata){
-		user = angular.fromJson($rootScope.userdata);
-		name = user.name;
-	}
+		var name = "Anonymous";
+		if($rootScope.userdata){
+			user = angular.fromJson($rootScope.userdata);
+			name = user.name;
+		}
 		$scope.hello = homeService.sayHello(name);
+		
+		var logout = function($q, $scope){
+			$rootScope.userdata = null;
+			$location.path("#/login");
+		}
     }
 ]);
 
 omozonControllers.controller('UserController', ['$rootScope', '$scope', '$q', '$http', '$location', 'Base64',
 	function ($rootScope, $scope, $q, $http, $location, Base64) { // angular performs DI: denominator usersService equals denominator registered in userService.js
-
-	    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
+		$scope.errmsg = "";    
+	
+	//I like to have an init() for controllers that need to perform some initialization. Keeps things in
 	    //one place...not required though especially in the simple example below
 //	    init();
 //	
@@ -64,11 +70,13 @@ omozonControllers.controller('UserController', ['$rootScope', '$scope', '$q', '$
 		                // this callback will be called asynchronously
 		                // when the response is available
 		                defered.resolve(true);
+		                $location.path("/");
 		            }).
 		            error(function(data, status, headers, config) {
 		                // called asynchronously if an error occurs
 		                // or server returns response with an error status.
-		                $scope.userdata = data;
+		                $scope.userdata = null;
+		                $scope.errmsg = "User or password not correct. To test try 'freddy' and passwd 'krueger'...";
 		                // Handling:
 		                // 1) capture 401 response,
 		                if (status == 401) {
@@ -90,11 +98,6 @@ omozonControllers.controller('UserController', ['$rootScope', '$scope', '$q', '$
 						return $q.reject(response);
 		            });
 	    }
-	    
-		var logout = function($q, $scope){
-			$rootScope.userdata = null;
-			$location.path("#/");
-		}
 	}
 ]);
 

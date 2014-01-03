@@ -20,7 +20,10 @@ var app = angular.module('omozonHTML5App', [ 'ngRoute', 'omozonControllers' ]);
 app.config( [ '$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
 	$routeProvider.when('/', {
 		controller : 'HomeController',
-		templateUrl : 'partials/home.html'
+		templateUrl : 'partials/home.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/login', {
 		controller : 'UserController',
 		templateUrl : 'partials/login.html'
@@ -38,58 +41,112 @@ app.config( [ '$routeProvider', '$httpProvider', function($routeProvider, $httpP
         }
 	}).when('/stores/list', {
 		controller : 'StoreController',
-		templateUrl : 'partials/storeList.html'
+		templateUrl : 'partials/storeList.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/stores/detail/:storeId', {
 		controller : 'StoreController',
-		templateUrl : 'partials/storeDetail.html'
+		templateUrl : 'partials/storeDetail.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/storeOffers', {
 		controller : 'StoreOffersController',
-		templateUrl : 'partials/storeOffers.html'
+		templateUrl : 'partials/storeOffers.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/storeOffers/list/:storeId', {
 		controller : 'StoreOffersController',
-		templateUrl : 'partials/storeOffersList.html'
+		templateUrl : 'partials/storeOffersList.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/storeOffers/detail/:productId', {
 		controller : 'StoreOffersController',
-		templateUrl : 'partials/productDetail.html'
+		templateUrl : 'partials/productDetail.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/storeOffers/detail/qr/:productId', {
 		controller : 'StoreOffersController',
-		templateUrl : 'partials/storeOffersDetailQr.html'
+		templateUrl : 'partials/storeOffersDetailQr.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/productSearch', {
 		controller : 'ProductsController',
-		templateUrl : 'partials/productSearch.html'
+		templateUrl : 'partials/productSearch.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/productSearch/list', {
 		controller : 'ProductsController',
-		templateUrl : 'partials/productSearchResultList.html'
+		templateUrl : 'partials/productSearchResultList.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/productSearch/detail/:productId', {
 		controller : 'ProductsController',
-		templateUrl : 'partials/productDetail.html'
+		templateUrl : 'partials/productDetail.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/myOmozon', {
 		controller : 'MyOmozonController',
-		templateUrl : 'partials/myOmozon.html'
+		templateUrl : 'partials/myOmozon.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/myOmozon/stores', {
 		controller : 'MyOmozonController',
-		templateUrl : 'partials/myOmozonStores.html'
+		templateUrl : 'partials/myOmozonStores.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/myOmozon/profile', {
 		controller : 'MyOmozonController',
-		templateUrl : 'partials/myOmozonProfile.html'
+		templateUrl : 'partials/myOmozonProfile.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/myOmozon/purchases', {
 		controller : 'MyOmozonController',
-		templateUrl : 'partials/myOmozonPurchases.html'
+		templateUrl : 'partials/myOmozonPurchases.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/myOmozon/wishlist', {
 		controller : 'MyOmozonController',
-		templateUrl : 'partials/myOmozonWishlist.html'
+		templateUrl : 'partials/myOmozonWishlist.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/myOmozon/wallet', {
 		controller : 'MyOmozonController',
-		templateUrl : 'partials/myOmozonWallet.html'
+		templateUrl : 'partials/myOmozonWallet.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/myOmozon/wallet/vouchers', {
 		controller : 'MyOmozonController',
-		templateUrl : 'partials/myOmozonVouchers.html'
+		templateUrl : 'partials/myOmozonVouchers.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/myOmozon/wallet/coins', {
 		controller : 'MyOmozonController',
-		templateUrl : 'partials/myOmozonCoins.html'
+		templateUrl : 'partials/myOmozonCoins.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).when('/shop', {
 		controller : 'HomeController',
-		templateUrl : 'partials/shopRedirect.html'
+		templateUrl : 'partials/shopRedirect.html',
+		resolve: {
+            factory: checkRouting
+        }
 	}).otherwise( {
 		redirectTo : '/'
 	});
