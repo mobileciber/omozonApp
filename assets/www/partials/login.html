@@ -3,5 +3,17 @@
         <header>
             <h3>Login</h3>
         </header>
+        <div ng-controller="UserController">
+			<form ng-submit="login()">
+	        <input type="text" ng-model="username"  size="30" placeholder="Benutzer">
+	        <input type="password" ng-model="passwd"  size="30" placeholder="Passwort">
+	        <input class="btn-primary" type="submit" value="login">
+	    	</form>
+	    	<div ng-model="userdata">
+	    	{{errmsg}}
+	    	</div>
+	    	<a href="#/register">create new account</a><br />
+	    	<a href="#/passwdForgotten">password forgotten</a>
+		</div>
 	</div>
 </div>

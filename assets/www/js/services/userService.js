@@ -1,6 +1,8 @@
 ﻿//This handles retrieving data and is used by controllers. 3 options (server, factory, provider) with 
 //each doing the same thing just structuring the functions/data differently.
-app.service('userService', function () {
+var userService = angular.module('userService', []);
+
+userService.service('userService', function () {
     this.getUsers = function () {
     	//@ToDo: Implement REST call to fetch data from backend
         return users;
