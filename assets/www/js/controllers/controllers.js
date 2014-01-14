@@ -89,7 +89,6 @@ omozonControllers.controller('UserController', ['$rootScope', '$scope', '$q', '$
 	    	 
     	$scope.reset = function() {
 	    	$scope.user = angular.copy({});
-	    	$scope.passwdRepeat = "";
 	    };
 	}
 ]);
