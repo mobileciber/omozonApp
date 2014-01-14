@@ -4,5 +4,56 @@
         <header>
             <h3>Register</h3>
         </header>
+        <div>
+        	<form novalidate class="register-form">
+        		<table border="0">
+        			<thead>
+        				<tr>
+        					<td colspan="2">einfach ausfŸllen und los geht«s...</td>
+        				</tr>
+        			</thead>
+        			<tbody>
+        				<tr>
+        					<td>Benutzername:</td>
+        					<td><input type="text" ng-model="user.username" /></td>
+        				</tr>
+        				<tr>
+        					<td>Passwort:</td>
+        					<td><input type="text" ng-model="user.passwd" /></td>
+        				</tr>
+        				<tr>
+        					<td>Passwort wiederholen:</td>
+        					<td><input type="text" ng-model="passwdRepeat" /></td>
+        				</tr>
+        				<tr>
+        					<td>E-Mail:</td>
+        					<td><input type="text" ng-model="user.email" /></td>
+        				</tr>
+        				<tr>
+        					<td colspan="2">Adresse:</td>
+        				</tr>
+        				<tr>
+        					<td>Vor- und Zuname:</td>
+        					<td><input type="text" ng-model="user.name" /></td>
+        				</tr>
+        				<tr>
+        					<td>Stra§e / Hausnr.:</td>
+        					<td><input type="text" ng-model="user.street" /></td>
+        				</tr>
+        				<tr>
+        					<td>PLZ</td>
+        					<td><input type="text" ng-model="user.zip" /></td>
+        				</tr>
+        				<tr>
+        					<td>Stadt:</td>
+        					<td><input type="text" ng-model="user.city" /></td>
+        				</tr>
+        			</tbody>
+        		</table>
+        		<button ng-click="reset()">RESET</button>
+        		<button ng-click="register(user)">Anmelden</button>
+        	</form>
+        	{{registerNotification}}
+        </div>
 	</div>
 </div>

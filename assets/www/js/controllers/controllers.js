@@ -5,19 +5,6 @@ var omozonControllers = angular.module('omozonControllers', ['homeService',
                                                        'productService',
                                                        'myOmozonService']);
 
-//controllers.controller('HomeController', function ($scope, $q, $http, $location, homeService) {
-////	$scope.login = function(){
-////		return homeService.login();
-////	}
-//	
-//	var logout = function($q, $scope){
-//		var defered = $q.defer();
-//		$scope.userdata = null;
-//		$location.path("/login");
-//		return deferred.promise;
-//	}
-//});
-
 omozonControllers.controller('HomeController', ['$rootScope', '$scope', '$q', '$http', '$location', 'homeService',
     function ($rootScope, $scope, $q, $http, $location, homeService) {
 		var name = "Anonymous";
@@ -34,37 +21,15 @@ omozonControllers.controller('HomeController', ['$rootScope', '$scope', '$q', '$
     }
 ]);
 
-omozonControllers.controller('UserController', ['$rootScope', '$scope', '$q', '$http', '$location', 'Base64',
-	function ($rootScope, $scope, $q, $http, $location, Base64) { // angular performs DI: denominator usersService equals denominator registered in userService.js
-		$scope.errmsg = "";    
-	
-	//I like to have an init() for controllers that need to perform some initialization. Keeps things in
-	    //one place...not required though especially in the simple example below
-//	    init();
-//	
-//	    function init() {
-//	        $scope.users = usersService.getCustomers();
-//	    }
-//	
-//	    $scope.insertUser = function () {
-//	        var firstName = $scope.newUser.firstName;
-//	        var lastName = $scope.newUser.lastName;
-//	        var city = $scope.newUser.city;
-//	        usersService.insertUser(firstName, lastName, city);
-//	        $scope.newUser.firstName = '';
-//	        $scope.newUser.lastName = '';
-//	        $scope.newUser.city = '';
-//	    };
-//	
-//	    $scope.deleteCustomer = function (id) {
-//	        customersService.deleteCustomer(id);
-//	    };
+omozonControllers.controller('UserController', ['$rootScope', '$scope', '$q', '$http', '$location', 'Base64', 'userService',
+	function ($rootScope, $scope, $q, $http, $location, Base64, userService) { // angular performs DI: denominator usersService equals denominator registered in userService.js
+		$scope.errmsg = "";
 	    
 	    $scope.login = function(){
 			var defered = $q.defer();        
 		    $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.username + ':' + $scope.passwd);
 		    $http.defaults.headers.post = {'Content-Type': 'application/json'};
-		    $http({method: 'GET', url: 'http://192.168.0.104:8484/hybridmobile-backend/api/customers?username=' + $scope.username}).
+		    $http({method: 'GET', url: 'http://192.168.0.101:8484/hybridmobile-backend/api/customers?username=' + $scope.username}).
 		            success(function(data, status, headers, config) {
 		                $rootScope.userdata = data;
 		                // this callback will be called asynchronously
@@ -85,19 +50,47 @@ omozonControllers.controller('UserController', ['$rootScope', '$scope', '$q', '$
 								config : config,
 								defered : defered
 							}
-							// 3) create and return new object representing serverÕs future answer (instead of returning the original failed response),
+							// 3) create and return new object representing serverï¿½s future answer (instead of returning the original failed response),
 							$scope.requests401 = [];
 							$scope.requests401.push(req);
 							// 4) broadcast that login is required, so application can react, in particular login form can appear,
 		//					$scope.$broadcast('event:loginRequired'); // How events work? => http://docs.angularjs.org/guide/scope
 							$location.path("/login");
-							// 5) listen to login successful events, so we can gather all the saved request parameters, resend them again and trigger all the âfutureÕ objects (returned previously).
+							// 5) listen to login successful events, so we can gather all the saved request parameters, resend them again and trigger all the ï¿½futureï¿½ objects (returned previously).
 							return defered.promise;
 						}
 						// otherwise
 						return $q.reject(response);
 		            });
 	    }
+	    
+	    $scope.register = function(user) {
+	    	$scope.master = angular.copy(user);
+	    	userService.getUser(user.username).
+				success(function(data, status, headers, config) {
+					$scope.registerNotification = "Benutzer existiert bereits.";
+				}).
+				error(function(data, status, headers, config) {
+					$scope.registerNotification = status;
+					if(status == 404){ // 404 - user not found
+						data = angular.toJson(user);
+						userService.insertUser(data).
+							success(function(data, status, headers, config) {
+								$scope.registerNotification = "Benutzer erfolgreich angelegt.";
+//								$rootScope.userdata = data;
+//					    		$location.path("/");
+							}).
+							error(function(data, status, headers, config) {
+								$scope.registerNotification = "Fehler beim Anlegen des Users. Bitter versuchen Sie es spÃ¤ter noch einmal."; // 500 - processing error
+							});
+					}
+				});
+	    };
+	    	 
+    	$scope.reset = function() {
+	    	$scope.user = angular.copy({});
+	    	$scope.passwdRepeat = "";
+	    };
 	}
 ]);
 
